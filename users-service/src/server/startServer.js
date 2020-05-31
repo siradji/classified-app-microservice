@@ -3,7 +3,7 @@ import cors from 'cors'
 
 import accessEnv from '#root/helpers/accessEnv'
 
-const port = accessEnv("PORT", 7101)
+const port = accessEnv("PORT",7101)
 
 const app = express()
 
@@ -18,4 +18,4 @@ app.use(express.urlencoded({
 }))
 
 
-app.listen(port, () => console.log('server for users service started'))
+app.listen(port, "0.0.0.0", () => console.log(`server for users service started on ${port}`))

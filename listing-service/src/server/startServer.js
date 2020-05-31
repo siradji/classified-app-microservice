@@ -2,8 +2,9 @@ import express from 'express'
 import cors from 'cors'
 
 import accessEnv from '#root/helpers/accessEnv'
+import setupRoutes from './routes'
 
-const port = accessEnv("PORT", 7100)
+const port = accessEnv("PORT",7100)
 
 const app = express()
 
@@ -17,5 +18,7 @@ app.use(express.urlencoded({
     extended: false
 }))
 
+setupRoutes(app)
 
-app.listen(port, () => console.log('server for listing service started'))
+
+app.listen(port, "0.0.0.0", () => console.log(`server for listing service started ${port}`))

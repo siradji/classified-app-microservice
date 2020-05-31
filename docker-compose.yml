@@ -6,6 +6,7 @@ services:
             - listing-service-db
         environment: 
             - DB_URI=mysql://root:password@listing-service-db/listings?charset=UTF8
+            - PORT=7100
         ports:
             - 7100:7100
         volumes: 
@@ -30,6 +31,7 @@ services:
             - users-service-db
         environment: 
             - DB_URI=mysql://root:password@users-service-db/users?charset=UTF8
+            - PORT=7101
         ports:
             - 7101:7101
         volumes:
