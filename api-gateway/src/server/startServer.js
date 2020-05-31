@@ -6,7 +6,6 @@ import express from 'express'
 
 
 import accessEnv from '#root/helpers/accessEnv'
-
 import resolvers from '#root/graphql/resolvers'
 import typeDefs from '#root/graphql/typeDefs'
 
