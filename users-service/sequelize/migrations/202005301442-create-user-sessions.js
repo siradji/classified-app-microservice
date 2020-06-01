@@ -7,11 +7,7 @@ module.exports.up  = (queryInterface, DataTypes) => {
             primaryKey: true,
             type: DataTypes.UUID
         },
-        email: {
-            allowNull: false,
-            type: DataTypes.STRING,
-            unique: true
-        },
+        
         userId: {
             allowNull:false,
             references:{
@@ -20,11 +16,7 @@ module.exports.up  = (queryInterface, DataTypes) => {
             }, 
             type: DataTypes.UUID
         },
-        password: {
-            allowNull: false,
-            type: DataTypes.CHAR(64),
-            
-        },
+    
         expiresAt: {
             allowNull: false,
             type: DataTypes.DATE

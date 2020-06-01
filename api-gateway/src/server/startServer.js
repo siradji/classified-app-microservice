@@ -13,6 +13,7 @@ import typeDefs from '#root/graphql/typeDefs'
 const port = accessEnv("PORT", 7000)
 
 const apolloServer  = new ApolloServer({
+    context: a => a,
     resolvers,
     typeDefs
 })
