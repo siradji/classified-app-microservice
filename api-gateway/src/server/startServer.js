@@ -5,7 +5,7 @@ import cookieparser from 'cookie-parser'
 
 import cors from 'cors'
 import express from 'express'
-
+import InjectSession from './injectSession'
 
 import accessEnv from '#root/helpers/accessEnv'
 import resolvers from '#root/graphql/resolvers'
@@ -27,6 +27,9 @@ app.use(cors({
     origin: (origin, cb) => cb(null, true),
     credentials: true
 }))
+
+
+app.use(InjectSession)
 
 apolloServer.applyMiddleware({app, cors: false, path: '/graphql'})
 
