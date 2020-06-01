@@ -10,7 +10,7 @@ import TextInput from '#root/components/common/TextInput'
 
 const mutation  = gql`
 mutation($email: String!, $password: String!) {
-    createUserSession(email: $email, passowrd: $password) {
+    createUserSession(email: $email, password: $password) {
         id
         user{
            email
@@ -22,14 +22,21 @@ mutation($email: String!, $password: String!) {
 `
 
 const Login = () => {
+
+    const [ createUserSession] = useMutation(mutation) 
+
     const {
         formState : {isSubmitting},
         handleSubmit,
         register
     }  = useForm()
  
-    const funcSubmit = handleSubmit(({email, password}) => {
-        console.log(email, password)
+    const funcSubmit =   handleSubmit( async ({email, password}) => {
+        const result = await createUserSession({
+            variables:
+         {email, password}}
+            )
+        console.log(result)
     })
 
     return (

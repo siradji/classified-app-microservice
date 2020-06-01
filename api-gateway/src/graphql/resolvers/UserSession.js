@@ -1,4 +1,4 @@
-import UserService from '#root/adapter/UserService'
+import UserService from '#root/adapter/usersService'
 
 
 

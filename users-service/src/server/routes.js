@@ -13,7 +13,6 @@ const USER_SESSION_EXPIRY_HOURS = 1
 
 const setupRoutes = app => {
 
-
     app.post('/session', async (req, res, next) => {
 
         if(!req.body.email || !req.body.password) {
@@ -48,6 +47,19 @@ const setupRoutes = app => {
             return next(error)
         }
     })
+
+    app.get("/sessions/sessionId", (req,res) => {
+        
+        try {
+            const userSession  = await UserSessions.findByPk(req.params.sessionId)    
+
+            if(!userSession) return next(new Error(" Invalid session id "))
+
+            return res.json(userSession)
+        } catch (error) {
+            return next(error)
+        }
+    })
     
     app.post('/users', async (req, res , next) => {
     
@@ -75,12 +87,12 @@ const setupRoutes = app => {
     app.get('/users/:userId', async (req, res, next) => {
         try {
             const user = await User.findByPk(req.params.userId)
-
+            console.log('hit')
             if(!user) return next( new Error("Invalid user id"))
 
             return res.json(user)
         } catch (error) {
-            next(error)
+            next(error )  
         }
          
     })

@@ -13,9 +13,10 @@ export default class usersService {
 
        return body
     } 
-
+ 
     static async  fetchUser({userId}) {
-        const body  = await got.get(`${USERS_SERVICE_URI}/users/userId`).json()
+        console.log('hit from fetch')
+        const body  = await got.get(`${USERS_SERVICE_URI}/users/${userId}`).json()
 
         return body
     }
@@ -31,7 +32,5 @@ export default class usersService {
         return body
     }
 
-    static async  fetchUser({userId}) {
-        const body  = await got.get('')
-    }
+
 }
