@@ -1,9 +1,7 @@
 import {DataTypes, Model} from 'sequelize'
 import sequelizeConnection from './connection'
 
-export class User extends Model {
-
-}
+export class User extends Model {}
 
 User.init(
     {
@@ -40,12 +38,12 @@ UserSessions.init(
     {
         id: {
             allowNull: false,
-        
             primaryKey: true,
             type: DataTypes.UUID
         },
         userId: {
             allowNull:false,
+            type: DataTypes.UUID
             
         },
         expiresAt: {

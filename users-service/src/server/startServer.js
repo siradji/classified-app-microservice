@@ -19,5 +19,8 @@ app.use(express.urlencoded({
 
 setupRoutes(app)
 
+app.use((err, req, res, next) => {
+    return res.status(500).json({mesage: err.message})
+})
 
 app.listen(port, "0.0.0.0", () => console.log(`server for users service started on ${port}`))
