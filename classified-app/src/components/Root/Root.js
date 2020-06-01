@@ -1,6 +1,10 @@
 import React from 'react'
 
+
 import styled from 'styled-components'
+import Login from './Login/Login'
+
+
 
 const Root = () => {
     return (
@@ -11,7 +15,7 @@ const Root = () => {
                 content
             </Content>
             <Sidebar>
-                sidebar
+                <Login />
             </Sidebar>
           </Container>
         </Wrapper>
