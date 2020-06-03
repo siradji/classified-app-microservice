@@ -19,7 +19,7 @@ type User {
 type UserSession {
     createdAt: Date!
     expiresAt: Date!
-    id: ID!,
+    id: ID!
     user: User!
 }
 
@@ -30,6 +30,7 @@ type Mutation {
 
 type Query {
     listings: [Listing!]!
+    userSession(me: Boolean!): UserSession
 }
 
 `

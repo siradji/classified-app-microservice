@@ -1,4 +1,4 @@
-import UsersService from  "#root/adapter/UsersService"
+import UsersService from  "#root/adapter/usersService"
 
 
 const InjectSession = async(req, res, next)  => {

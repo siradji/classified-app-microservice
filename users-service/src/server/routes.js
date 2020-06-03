@@ -48,7 +48,7 @@ const setupRoutes = app => {
         }
     })
 
-    app.get("/sessions/sessionId", (req,res) => {
+    app.get("/sessions/sessionId", async (req,res) => {
         
         try {
             const userSession  = await UserSessions.findByPk(req.params.sessionId)    

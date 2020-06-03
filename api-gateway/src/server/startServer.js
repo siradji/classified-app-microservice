@@ -1,16 +1,23 @@
+// core
 import {ApolloServer} from 'apollo-server-express'
-import cookieparser from 'cookie-parser'
-
-
-
-import cors from 'cors'
 import express from 'express'
+
+
+//  middlewares 
+import cors from 'cors'
+import cookieparser from 'cookie-parser'
 import InjectSession from './injectSession'
 
+// helpers 
 import accessEnv from '#root/helpers/accessEnv'
 import resolvers from '#root/graphql/resolvers'
 import typeDefs from '#root/graphql/typeDefs'
 
+
+
+/**
+ * Start of apollo - express server
+ */
 
 const port = accessEnv("PORT", 7000)
 
@@ -36,3 +43,9 @@ apolloServer.applyMiddleware({app, cors: false, path: '/graphql'})
 app.listen(port, "0.0.0.0", () => {
     console.info(`Api gateway listing on port: ${port}`)
 })
+
+
+/**
+ * End of apollo express server
+ * 
+ */
