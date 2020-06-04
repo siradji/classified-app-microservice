@@ -22,7 +22,6 @@ const setupRoutes = app => {
         }
         try {
             const user = await User.findOne({attributes: {}, where: {email: req.body.email}})
-            console.log(user)
             
             if(!user) return next( new Error('invalid email'))
 
