@@ -1,1 +1,1 @@
-export const veryLightGrey = "#cccccc"
+export const veryLightGrey = '#cccccc'
