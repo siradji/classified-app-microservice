@@ -1,17 +1,19 @@
 // core
-import {ApolloServer} from 'apollo-server-express'
-import express from 'express'
-
-
-//  middlewares 
-import cors from 'cors'
-import cookieparser from 'cookie-parser'
-import InjectSession from './injectSession'
-
-// helpers 
-import accessEnv from '#root/helpers/accessEnv'
 import resolvers from '#root/graphql/resolvers'
 import typeDefs from '#root/graphql/typeDefs'
+// helpers 
+import accessEnv from '#root/helpers/accessEnv'
+import {
+    ApolloServer
+} from 'apollo-server-express'
+import cookieparser from 'cookie-parser'
+//  middlewares 
+import cors from 'cors'
+import express from 'express'
+import InjectSession from './injectSession'
+
+
+
 
 
 
@@ -21,13 +23,13 @@ import typeDefs from '#root/graphql/typeDefs'
 
 const port = accessEnv("PORT", 7000)
 
-const apolloServer  = new ApolloServer({
+const apolloServer = new ApolloServer({
     context: a => a,
     resolvers,
     typeDefs
 })
 
-const app  = express()
+const app = express()
 
 app.use(cookieparser())
 app.use(cors({
@@ -38,7 +40,11 @@ app.use(cors({
 
 app.use(InjectSession)
 
-apolloServer.applyMiddleware({app, cors: false, path: '/graphql'})
+apolloServer.applyMiddleware({
+    app,
+    cors: false,
+    path: '/graphql'
+})
 
 app.listen(port, "0.0.0.0", () => {
     console.info(`Api gateway listing on port: ${port}`)
