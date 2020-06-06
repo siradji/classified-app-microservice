@@ -59579,7 +59579,7 @@ var clearSession = function clearSession() {
 };
 
 exports.clearSession = clearSession;
-},{}],"components/Root/AccountDetails/AccountDetails.js":[function(require,module,exports) {
+},{}],"components/Root/Account/Account.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -59589,15 +59589,112 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reactHooks = require("@apollo/react-hooks");
+
+var _graphqlTag = _interopRequireDefault(require("graphql-tag"));
+
+var _reactRedux = require("react-redux");
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _session = require("#root/store/ducks/session");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AccountDetails = function AccountDetails() {
-  return /*#__PURE__*/_react.default.createElement("h1", null, "Account Details A ");
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\ncolor: blue;\ndisplay: block;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 1.1em;\n  margin-top: 0.25em;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 0.9em;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  mutation($sessionId: ID!) {\n    deleteUserSession(sessionId: $sessionId) \n  }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var mutation = (0, _graphqlTag.default)(_templateObject());
+
+var Account = function Account() {
+  var dispatch = (0, _reactRedux.useDispatch)();
+
+  var _useMutation = (0, _reactHooks.useMutation)(mutation),
+      _useMutation2 = _slicedToArray(_useMutation, 1),
+      deleteUserSession = _useMutation2[0];
+
+  var session = (0, _reactRedux.useSelector)(function (state) {
+    return state.session;
+  });
+  return /*#__PURE__*/_react.default.createElement(Wrapper, null, "Logged in as", /*#__PURE__*/_react.default.createElement(Email, null, session.user.email), /*#__PURE__*/_react.default.createElement(LogoutLink, {
+    onClick: function onClick(e) {
+      e.preventDefault();
+      dispatch((0, _session.clearSession)());
+      deleteUserSession({
+        variables: {
+          sessionId: session.id
+        }
+      });
+    }
+  }, "LOg out"));
 };
 
-var _default = AccountDetails;
+var Wrapper = _styledComponents.default.div(_templateObject2(), function (props) {
+  return props.theme.mortar;
+});
+
+var Email = _styledComponents.default.div(_templateObject3(), function (props) {
+  return props.theme.nero;
+});
+
+var LogoutLink = _styledComponents.default.a.attrs({
+  href: "#"
+})(_templateObject4());
+
+var _default = Account;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Root/AccountDetails/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@apollo/react-hooks":"../node_modules/@apollo/react-hooks/lib/react-hooks.esm.js","graphql-tag":"../node_modules/graphql-tag/src/index.js","react-redux":"../node_modules/react-redux/es/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","#root/store/ducks/session":"store/ducks/session.js"}],"components/Root/Account/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -59605,13 +59702,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _AccountDetails = _interopRequireDefault(require("./AccountDetails"));
+var _Account = _interopRequireDefault(require("./Account"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = _AccountDetails.default;
+var _default = _Account.default;
 exports.default = _default;
-},{"./AccountDetails":"components/Root/AccountDetails/AccountDetails.js"}],"../node_modules/react-hook-form/dist/react-hook-form.es.js":[function(require,module,exports) {
+},{"./Account":"components/Root/Account/Account.js"}],"../node_modules/react-hook-form/dist/react-hook-form.es.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -61965,9 +62062,8 @@ var Login = function Login() {
 
             case 3:
               result = _context.sent;
-              console.log(result);
 
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -61981,20 +62077,20 @@ var Login = function Login() {
   }());
   return /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: funcSubmit
-  }, /*#__PURE__*/_react.default.createElement(Label, null, /*#__PURE__*/_react.default.createElement(LabelText, null, "email"), /*#__PURE__*/_react.default.createElement(_TextInput.default, {
+  }, /*#__PURE__*/_react.default.createElement(Label, null, /*#__PURE__*/_react.default.createElement(LabelText, null, " email "), ' ', /*#__PURE__*/_react.default.createElement(_TextInput.default, {
     disabled: isSubmitting,
     name: "email",
     type: "email",
     ref: register
-  })), /*#__PURE__*/_react.default.createElement(Label, null, /*#__PURE__*/_react.default.createElement(LabelText, null, "Password"), /*#__PURE__*/_react.default.createElement(_TextInput.default, {
+  }), ' '), ' ', /*#__PURE__*/_react.default.createElement(Label, null, /*#__PURE__*/_react.default.createElement(LabelText, null, " Password "), ' ', /*#__PURE__*/_react.default.createElement(_TextInput.default, {
     disabled: isSubmitting,
     name: "password",
     type: "password",
     ref: register
-  })), /*#__PURE__*/_react.default.createElement(Button, {
+  }), ' '), ' ', /*#__PURE__*/_react.default.createElement(Button, {
     disabled: isSubmitting,
     type: "submit"
-  }, ' ', "Login"));
+  }, ' ', "Login", ' '), ' ');
 };
 
 var Label = _styledComponents.default.label(_templateObject2());
@@ -62005,7 +62101,62 @@ var Button = _styledComponents.default.button(_templateObject4());
 
 var _default = Login;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-hook-form":"../node_modules/react-hook-form/dist/react-hook-form.es.js","@apollo/react-hooks":"../node_modules/@apollo/react-hooks/lib/react-hooks.esm.js","graphql-tag":"../node_modules/graphql-tag/src/index.js","#root/components/common/TextInput":"components/common/TextInput.js"}],"components/Root/Root.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","react-hook-form":"../node_modules/react-hook-form/dist/react-hook-form.es.js","@apollo/react-hooks":"../node_modules/@apollo/react-hooks/lib/react-hooks.esm.js","graphql-tag":"../node_modules/graphql-tag/src/index.js","#root/components/common/TextInput":"components/common/TextInput.js"}],"components/Root/Login/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Login = _interopRequireDefault(require("./Login"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = _Login.default;
+exports.default = _default;
+},{"./Login":"components/Root/Login/Login.js"}],"components/Root/AccountDetails/AccountDetails.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _Account = _interopRequireDefault(require("../Account"));
+
+var _Login = _interopRequireDefault(require("../Login"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var AccountDetails = function AccountDetails() {
+  var session = (0, _reactRedux.useSelector)(function (state) {
+    return state.session;
+  });
+  return session.id ? /*#__PURE__*/_react.default.createElement(_Account.default, null) : /*#__PURE__*/_react.default.createElement(_Login.default, null);
+};
+
+var _default = AccountDetails;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../Account":"components/Root/Account/index.js","../Login":"components/Root/Login/index.js"}],"components/Root/AccountDetails/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _AccountDetails = _interopRequireDefault(require("./AccountDetails"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = _AccountDetails.default;
+exports.default = _default;
+},{"./AccountDetails":"components/Root/AccountDetails/AccountDetails.js"}],"components/Root/Root.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -62113,17 +62264,15 @@ var Root = function Root() {
     _graphqlClient.default.query({
       query: query
     }).then(function (data) {
-      console.log(data.data.userSession);
-
       if (data.data.userSession) {
         dispatch((0, _session.setSession)(data.data.userSession));
       }
-
-      setInitialized(true);
     });
+
+    setInitialized(true);
   }, []);
   if (!initialised) return /*#__PURE__*/_react.default.createElement("h1", null, " LOading.. ");
-  return /*#__PURE__*/_react.default.createElement(Wrapper, null, /*#__PURE__*/_react.default.createElement(Container, null, /*#__PURE__*/_react.default.createElement(Content, null, " content "), ' ', " ", /*#__PURE__*/_react.default.createElement(Sidebar, null, /*#__PURE__*/_react.default.createElement(_AccountDetails.default, null)), ' ', " "), " ", ' ', " ");
+  return /*#__PURE__*/_react.default.createElement(Wrapper, null, /*#__PURE__*/_react.default.createElement(Container, null, /*#__PURE__*/_react.default.createElement(Content, null, " content "), ' ', /*#__PURE__*/_react.default.createElement(Sidebar, null, /*#__PURE__*/_react.default.createElement(_AccountDetails.default, null)), ' '), ' ');
 };
 
 var Container = _styledComponents.default.div(_templateObject2());
@@ -62192,9 +62341,13 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.veryLightGrey = void 0;
+exports.nero = exports.mortar = exports.veryLightGrey = void 0;
 var veryLightGrey = '#cccccc';
 exports.veryLightGrey = veryLightGrey;
+var mortar = '#555555';
+exports.mortar = mortar;
+var nero = '#222222';
+exports.nero = nero;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 

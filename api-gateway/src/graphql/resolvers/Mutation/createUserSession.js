@@ -1,14 +1,21 @@
 import usersService from '#root/adapter/usersService'
 
-const createUserSessionResolver =  async (obj, {email, password}, context) => {
+const createUserSessionResolver = async (obj, {
+    email,
+    password
+}, context) => {
 
-const userSession =  await usersService.createUserSession({email, password})
-console.log(userSession)
+    const userSession = await usersService.createUserSession({
+        email,
+        password
+    })
 
-context.res.cookie("userSessionId", userSession.id, {httpOnly: true})
+    context.res.cookie("userSessionId", userSession.id, {
+        httpOnly: true
+    })
 
-return userSession 
-   
+    return userSession
+
 }
 
 

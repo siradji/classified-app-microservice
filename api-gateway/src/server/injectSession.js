@@ -1,7 +1,6 @@
 import UsersService from "#root/adapter/usersService";
 
 const InjectSession = async (req, res, next) => {
-    console.log(req.cookies)
     if (req.cookies.userSessionId) {
         const session = await UsersService.fetchUserSession({
             sessionId: req.cookies.userSessionId,

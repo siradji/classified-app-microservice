@@ -30,35 +30,37 @@ const Login = () => {
 
   const funcSubmit = handleSubmit(async ({ email, password }) => {
     const result = await createUserSession({
-      variables: { email, password },
+      variables: {
+        email,
+        password,
+      },
     })
-    console.log(result)
   })
 
   return (
     <form onSubmit={funcSubmit}>
       <Label>
-        <LabelText>email</LabelText>
+        <LabelText> email </LabelText>{' '}
         <TextInput
           disabled={isSubmitting}
           name="email"
           type="email"
           ref={register}
-        />
-      </Label>
+        />{' '}
+      </Label>{' '}
       <Label>
-        <LabelText>Password</LabelText>
+        <LabelText> Password </LabelText>{' '}
         <TextInput
           disabled={isSubmitting}
           name="password"
           type="password"
           ref={register}
-        />
-      </Label>
+        />{' '}
+      </Label>{' '}
       <Button disabled={isSubmitting} type="submit">
         {' '}
-        Login
-      </Button>
+        Login{' '}
+      </Button>{' '}
     </form>
   )
 }

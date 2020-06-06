@@ -1,10 +1,13 @@
 import React from 'react'
-import Login from './Login'
+import { useSelector } from 'react-redux'
 
-
+import Account from '../Account'
+import Login from '../Login'
 
 const AccountDetails = () => {
-    return <h1 > Account Details A < /h1>
+  const session = useSelector(state => state.session)
+
+  return session.id ? <Account /> : <Login />
 }
 
 export default AccountDetails
